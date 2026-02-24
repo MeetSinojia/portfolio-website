@@ -8,3 +8,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>,
 )
+
+// Register service worker to power the local /api/* endpoints
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch((err) => {
+    // swallow; dev server may block registration in some environments
+    console.warn('SW registration failed:', err);
+  });
+}

@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(true)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,7 +36,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    // Add scroll animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -57,7 +56,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    // Apply dark mode class to body
     if (isDarkMode) {
       document.body.classList.add('dark-mode')
     } else {
@@ -86,7 +84,6 @@ function App() {
     setIsSubmitting(true)
     setFormStatus('')
 
-    // Simple mailto solution
     const mailtoLink = `mailto:sinojiameet321@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`
@@ -127,6 +124,13 @@ function App() {
             >
               <i className={`fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}`}></i>
             </button>
+            <a 
+              href="/swagger.html" 
+              className="api-btn"
+              title="View API documentation"
+            >
+              <i className="fas fa-code"></i> Interactive Portfolio Playground
+            </a>
           </div>
           <div className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <span className="bar"></span>
@@ -151,11 +155,10 @@ function App() {
             <h1 className="hero-title">
               <span className="greeting">Hello, I'm</span>
               <span className="name">Meet Sinojia</span>
-              <span className="title">Software Engineer</span>
+              <span className="title">Backend Engineer — Systems & APIs</span>
             </h1>
             <p className="hero-description">
-              Passionate Flutter and React developer with expertise in cross-platform mobile apps and modern web development. 
-              Specializing in building scalable applications with clean architecture and beautiful user interfaces.
+              Building reliable production systems with Python and Golang. I work on backend architecture, data-heavy workflows, and high-performance APIs. Shipped full-stack products and passionate about clean code, scalability, and solving complex technical problems.
             </p>
             <div className="hero-buttons">
               <button className="btn-primary" onClick={() => scrollToSection('projects')}>
@@ -204,14 +207,10 @@ function App() {
           <div className="about-content">
             <div className="about-text">
               <p>
-                I'm a passionate Flutter and React developer with a strong foundation in 
-                Computer Science from Vellore Institute of Technology. I specialize in building 
-                cross-platform mobile applications and modern web applications with beautiful user interfaces.
+                I'm a Software Engineer who enjoys building systems from scratch and making them reliable in production. I work primarily on backend systems and APIs, with experience in Python, Golang, Node.js, SQL, and cloud deployments. Currently at UBS, I work on data-heavy workflows and performance improvements, where understanding systems deeply and writing clean, efficient code really matters.
               </p>
               <p>
-                My expertise includes developing full-stack applications using Flutter, React.js, and Node.js, 
-                with experience in cloud deployment and database management. I'm also an active 
-                competitive programmer with achievements on LeetCode, CodeChef, and Codeforces.
+                Outside of work, I've built and shipped full-stack products like Mr. Mechanic, a vendor management platform with a Flutter mobile app and Golang backend. I'm strong in data structures and algorithms (LeetCode Knight 1930+), and I genuinely enjoy solving complex technical problems. I like small teams, high ownership, and building things that actually get used.
               </p>
               <div className="about-stats">
                 <div className="stat">
@@ -258,11 +257,10 @@ function App() {
                 <span className="tech-tag">AWS</span>
               </div>
               <ul className="project-description">
-                <li>Developed a cross-platform Flutter Mobile app for vendor management, billing, and inventory</li>
-                <li>Implemented responsive UI for browsers and tablets using custom layouts and Flutter web optimization</li>
-                <li>Integrated REST APIs built in Golang (Gin framework) with secure JWT auth and OTP via MSG91</li>
-                <li>Used Provider for state management and JSON localization for multilingual support</li>
-                <li>Deployed web app on Render with AWS RDS backend and S3 for image storage</li>
+                <li>Built a full-stack vendor management system supporting billing and inventory operations</li>
+                <li>Designed and implemented REST APIs using Golang (Gin) with JWT authentication and OTP verification via MSG91</li>
+                <li>Deployed backend services on Render with AWS RDS and S3 for scalable data and image storage</li>
+                <li>Published the mobile application on Google Play Store, handling production builds, releases, and updates</li>
               </ul>
             </div>
             
@@ -284,8 +282,8 @@ function App() {
                 <span className="tech-tag">JavaScript</span>
               </div>
               <ul className="project-description">
-                <li>Developed EchoShop, an e-commerce website using React.js, Firebase, and Stripe for secure payments</li>
-                <li>Integrated location-based features via Big Cloud Data API and optimized delivery times using Dijkstra's algorithm</li>
+                <li>Developed a full-stack e-commerce platform with secure Stripe-based payment integration</li>
+                <li>Optimized delivery routing using Dijkstra's algorithm with real-time location data integration</li>
               </ul>
             </div>
           </div>
@@ -351,48 +349,49 @@ function App() {
       <section id="experience" className="experience animate-on-scroll">
         <div className="container">
           <h2 className="section-title">Experience</h2>
-          <div className="timeline">
-            <div className="timeline-item">
-              <div className="timeline-marker"></div>
-              <div className="timeline-content">
-                <div className="timeline-header">
-                  <h3>Software Engineer</h3>
-                  <span className="company">UBS Pune, India</span>
-                  <span className="duration">Feb 2024 – Current</span>
+          <div className="experience-container">
+            <div className="experience-card">
+              <div className="experience-header">
+                <div className="experience-info">
+                  <h3 className="job-title">Software Engineer</h3>
+                  <p className="company-name">UBS</p>
+                  <p className="location">Pune, India</p>
                 </div>
-                <ul className="timeline-description">
-                  <li>Optimized Data Quality Checks (DQC) for large-scale data processing (100GB+ monthly) using Python, NumPy, and Pandas</li>
-                  <li>Improved efficiency by reducing processing time by 10%, minimizing false data, and streamlining workflows</li>
-                  <li>Enhanced Data API by adding pagination and rate limiting, reducing average data fetch time from 10 seconds to 2 seconds</li>
-                  <li>Collaborated with front-end developers to integrate APIs with React-based internal dashboards</li>
-                  <li>Implemented role-based and user-specific access control using JWT authentication</li>
-                </ul>
-                <div className="tech-stack">
-                  <span className="tech-tag">Python</span>
-                  <span className="tech-tag">SQL</span>
-                  <span className="tech-tag">.NET</span>
-                  <span className="tech-tag">C#</span>
-                  <span className="tech-tag">Angular</span>
-                  <span className="tech-tag">Java</span>
-                </div>
+                <span className="duration">Feb 2024 – Present</span>
+              </div>
+              <ul className="experience-bullets">
+                <li>Optimized Data Quality Checks (DQC) for large-scale data processing (100GB+ monthly) using Python, NumPy, and Pandas</li>
+                <li>Improved efficiency by reducing processing time by 10%, minimizing false data, and streamlining workflows</li>
+                <li>Enhanced Data API by adding pagination and rate limiting, reducing average data fetch time from 10s to 2s</li>
+                <li>Collaborated with front-end developers to integrate APIs with React-based internal dashboards</li>
+                <li>Implemented role-based and user-specific access control using JWT authentication</li>
+              </ul>
+              <div className="experience-tech">
+                <span className="tech-badge">Python</span>
+                <span className="tech-badge">SQL</span>
+                <span className="tech-badge">.NET</span>
+                <span className="tech-badge">C#</span>
+                <span className="tech-badge">Angular</span>
+                <span className="tech-badge">Java</span>
               </div>
             </div>
-            <div className="timeline-item">
-              <div className="timeline-marker"></div>
-              <div className="timeline-content">
-                <div className="timeline-header">
-                  <h3>Prism Developer</h3>
-                  <span className="company">Samsung R&D India</span>
-                  <span className="duration">Dec 2022 – Aug 2023</span>
+            
+            <div className="experience-card">
+              <div className="experience-header">
+                <div className="experience-info">
+                  <h3 className="job-title">Prism Developer</h3>
+                  <p className="company-name">Samsung R&D India</p>
+                  <p className="location">Remote</p>
                 </div>
-                <ul className="timeline-description">
-                  <li>Collaborated on a UWB human angle detection, achieving 86% accuracy using the MUSIC and ESPRIT algorithms</li>
-                  <li>Analyzed a dataset of 12,000 UWB images to enhance data-driven outcomes and project impact</li>
-                </ul>
-                <div className="tech-stack">
-                  <span className="tech-tag">Python</span>
-                  <span className="tech-tag">Signal Processing</span>
-                </div>
+                <span className="duration">Dec 2022 – Aug 2023</span>
+              </div>
+              <ul className="experience-bullets">
+                <li>Collaborated on a UWB human angle detection system, achieving 86% accuracy using MUSIC and ESPRIT algorithms</li>
+                <li>Analyzed a dataset of 12,000 UWB images to enhance data-driven outcomes and project impact</li>
+              </ul>
+              <div className="experience-tech">
+                <span className="tech-badge">Python</span>
+                <span className="tech-badge">Signal Processing</span>
               </div>
             </div>
           </div>
