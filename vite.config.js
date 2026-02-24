@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  publicDir: 'public',
   build: {
-    copyPublicDir: true,
     rollupOptions: {
       input: {
         main: './index.html',
@@ -13,8 +13,5 @@ export default defineConfig({
         simple: './simple.html'
       }
     }
-  },
-  server: {
-    middlewareMode: false
   }
 })
