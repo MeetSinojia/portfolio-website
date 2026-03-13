@@ -1,21 +1,414 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Website</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <script>
-      // Register Service Worker for API mocking
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').catch(err => {
-          console.error('Service Worker registration failed:', err);
-        });
-      }
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet Sinojia — Software Engineer</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23080b10'/%3E%3Crect x='1' y='1' width='30' height='30' rx='5' fill='none' stroke='%2300ff88' stroke-width='1' opacity='0.4'/%3E%3Ctext x='5' y='14' font-family='monospace' font-size='8' fill='%2300ff88' opacity='0.5'%3E%2F%2F%3C/text%3E%3Ctext x='7' y='23' font-family='monospace' font-size='11' font-weight='bold' fill='%2300ff88'%3EMS%3C/text%3E%3Ccircle cx='26' cy='26' r='3' fill='%2300ff88' opacity='0.8'/%3E%3C/svg%3E">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div id="scroll-flash"></div>
+  <canvas id="matrix-rain"></canvas>
+  <div class="grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ── NAV ──────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-logo"><span>~/</span>meet-sinojia</div>
+    <ul class="nav-links">
+      <li><a href="#hero"       onclick="smoothNav(event,'hero')">Home</a></li>
+      <li><a href="#experience" onclick="smoothNav(event,'experience')">Experience</a></li>
+      <li><a href="#projects"   onclick="smoothNav(event,'projects')">Projects</a></li>
+      <li><a href="#skills"     onclick="smoothNav(event,'skills')">Skills</a></li>
+      <li><a href="#cp"         onclick="smoothNav(event,'cp')">Competitive</a></li>
+      <li><a href="#contact"    onclick="smoothNav(event,'contact')" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ───────────────────────────────────────────────────── -->
+    <section id="hero">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Open to opportunities
+      </div>
+
+      <h1 class="hero-name">
+        Meet<br><span class="accent">Sinojia</span><span class="cursor-blink"></span>
+      </h1>
+
+      <p class="hero-title">
+        <strong>Software Engineer</strong> | Backend Systems
+      </p>
+      <div class="hero-desc" style="display:flex; flex-direction:column; gap:14px; max-width:600px;">
+        <p>
+          Hi, I'm Meet — a software engineer who enjoys building practical systems that solve real problems. 
+          At UBS, I work on backend services, APIs, and data workflows that process large datasets and power internal platforms. 
+          I’m particularly interested in system design, performance, and building reliable backend systems.
+        </p>
+      
+        <p>
+          Outside work, I enjoy building products from scratch. One example is 
+          <strong style="color:var(--text)">Mr. Mechanic</strong>, a mobile and backend platform I built with a friend to help garages manage their daily operations. 
+          I also spend time sharpening my problem-solving skills through competitive programming 
+          (<strong style="color:var(--accent)">LeetCode Knight – 1930+</strong>).
+        </p>
+      </div>
+
+      <div class="hero-socials-row">
+        <a href="https://leetcode.com/u/Meet_Sinojia" target="_blank" class="social-card lc">
+          <span class="social-card-icon">⚡</span>
+          LeetCode
+          <span class="social-card-badge">Knight · 1930+</span>
+        </a>
+        <a href="https://github.com/MeetSinojia" target="_blank" class="social-card gh">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/meet-sinojia-453595203" target="_blank" class="social-card li">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="#contact" onclick="smoothNav(event,'contact')" class="social-card" style="color:var(--muted);border-color:var(--dim);background:rgba(255,255,255,0.02);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Get in Touch
+        </a>
+      </div>
+    </section>
+
+    <!-- ── EXPERIENCE ──────────────────────────────────────────────── -->
+    <div class="divider"><hr></div>
+    <section id="experience">
+      <div class="section-label fade-in">Experience</div>
+
+      <div class="exp-grid">
+
+        <!-- UBS -->
+        <div class="exp-card fade-in">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Software Engineer</div>
+              <div class="exp-company">
+                <span class="company-badge">UBS</span>
+                · Financial Technology
+              </div>
+            </div>
+            <div class="exp-meta">
+              <div class="exp-period">Feb 2024 – Present</div>
+              <div class="exp-location">📍 Pune, India</div>
+            </div>
+          </div>
+
+          <div class="exp-impact">
+            <div class="impact-pill"><span class="impact-num">5×</span> API Speed Boost</div>
+            <div class="impact-pill"><span class="impact-num">10%</span> Pipeline Optimization</div>
+            <div class="impact-pill"><span class="impact-num">100GB+</span> Data/Month</div>
+          </div>
+
+          <ul class="exp-bullets">
+            <li>Reduced Data API response time from <strong style="color:var(--text)">10s → 2s</strong> by implementing pagination and rate limiting.</li>
+            <li>Optimized large-scale Data Quality Check pipelines processing <strong style="color:var(--text)">100GB+ monthly</strong> with Python, NumPy, and Pandas — cutting processing time by 10%.</li>
+            <li>Integrated backend APIs with React-based internal dashboards, improving data accessibility for internal users.</li>
+            <li>Enforced role-based access control with JWT authentication, hardening API security workflows.</li>
+            <li>Built file import connectors and Python automations supporting the <strong style="color:var(--text)">UBS–Credit Suisse merger</strong> data integration in NeoXam.</li>
+            <li>Developed API integrations for file-based data exchange, improving scalability of internal data workflows.</li>
+          </ul>
+
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">SQL</span>
+            <span class="tech-tag">Java</span>
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">.NET</span>
+            <span class="tech-tag">Angular</span>
+            <span class="tech-tag">NeoXam</span>
+            <span class="tech-tag">Autosys</span>
+            <span class="tech-tag">JWT</span>
+          </div>
+        </div>
+
+        <!-- Samsung -->
+        <div class="exp-card fade-in">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Prism Developer</div>
+              <div class="exp-company">
+                <span class="company-badge">Samsung R&D India</span>
+                · Research
+              </div>
+            </div>
+            <div class="exp-meta">
+              <div class="exp-period">Dec 2022 – Aug 2023</div>
+              <div class="exp-location">📍 Remote</div>
+            </div>
+          </div>
+
+          <div class="exp-impact">
+            <div class="impact-pill"><span class="impact-num">86%</span> Model Accuracy</div>
+            <div class="impact-pill"><span class="impact-num">12,000+</span> UWB Images</div>
+          </div>
+
+          <ul class="exp-bullets">
+            <li>Engineered a <strong style="color:var(--text)">UWB-based human angle detection system</strong> achieving 86% accuracy using MUSIC and ESPRIT algorithms.</li>
+            <li>Processed and analyzed 12,000+ UWB images to improve model accuracy and data-driven outcomes.</li>
+            <li>Applied signal processing algorithms to build reliable spatial detection from raw sensor data.</li>
+          </ul>
+
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Signal Processing</span>
+            <span class="tech-tag">MUSIC Algorithm</span>
+            <span class="tech-tag">ESPRIT Algorithm</span>
+            <span class="tech-tag">UWB</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ────────────────────────────────────────────────── -->
+    <div class="divider"><hr></div>
+    <section id="projects">
+      <div class="section-label fade-in">Projects</div>
+
+      <div class="proj-grid">
+
+        <!-- Mr. Mechanic -->
+        <div class="proj-card fade-in">
+          <div class="proj-num">01 / Full-Stack · Production</div>
+          <div class="proj-title">Mr. Mechanic</div>
+          <p class="proj-desc">A full-stack vendor management system for billing and inventory operations. Published on Google Play Store, built with Go microservices and deployed on AWS infrastructure.</p>
+          <ul class="proj-highlights">
+            <li>REST APIs in Golang (Gin) with JWT auth and OTP verification via MSG91</li>
+            <li>Scheduled tasks and push notifications using Firebase</li>
+            <li>Reporting &amp; data visualization for large transactional datasets</li>
+            <li>Backend on Render, AWS RDS + S3 for scalable storage</li>
+            <li>Published on Google Play Store — handled production builds end-to-end</li>
+          </ul>
+          <div class="tech-stack">
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">Golang</span>
+            <span class="tech-tag">Gin</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">AWS RDS</span>
+            <span class="tech-tag">S3</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">JWT</span>
+            <span class="tech-tag">MSG91</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/MeetSinojia/mr_mechanics_demo" target="_blank" class="proj-link demo">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+              Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- EchoShop -->
+        <div class="proj-card fade-in">
+          <div class="proj-num">02 / Full-Stack · E-Commerce</div>
+          <div class="proj-title">EchoShop</div>
+          <p class="proj-desc">A full-stack e-commerce platform featuring algorithmic delivery route optimization and production-grade payment processing with Stripe.</p>
+          <ul class="proj-highlights">
+            <li>Secure Stripe payment integration with real-time webhooks</li>
+            <li>Dijkstra's algorithm for optimal delivery routing using live location data</li>
+            <li>Firebase backend for real-time data sync</li>
+            <li>Full cart, checkout, and order management system</li>
+          </ul>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Stripe</span>
+            <span class="tech-tag">Dijkstra's</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/MeetSinojia/EchoShop" target="_blank" class="proj-link demo">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+              Demo
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── SKILLS ──────────────────────────────────────────────────── -->
+    <div class="divider"><hr></div>
+    <section id="skills">
+      <div class="section-label fade-in">Tech Stack</div>
+
+      <div class="skills-layout fade-in">
+        <div class="skill-group">
+          <div class="skill-group-title">Languages</div>
+          <div class="skill-chips">
+            <span class="skill-chip">C++</span>
+            <span class="skill-chip">Python</span>
+            <span class="skill-chip">Golang</span>
+            <span class="skill-chip">Java</span>
+            <span class="skill-chip">JavaScript</span>
+            <span class="skill-chip">Dart</span>
+            <span class="skill-chip">SQL</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Frameworks &amp; Platforms</div>
+          <div class="skill-chips">
+            <span class="skill-chip">Gin</span>
+            <span class="skill-chip">Flutter</span>
+            <span class="skill-chip">React</span>
+            <span class="skill-chip">Node.js</span>
+            <span class="skill-chip">Spring Boot</span>
+            <span class="skill-chip">.NET</span>
+            <span class="skill-chip">Angular</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Cloud &amp; Infrastructure</div>
+          <div class="skill-chips">
+            <span class="skill-chip">AWS (RDS, S3)</span>
+            <span class="skill-chip">Firebase</span>
+            <span class="skill-chip">Render</span>
+            <span class="skill-chip">Autosys</span>
+            <span class="skill-chip">Unix/Linux</span>
+            <span class="skill-chip">Git</span>
+            <span class="skill-chip">Postman</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Core CS Concepts</div>
+          <div class="skill-chips">
+            <span class="skill-chip">Data Structures &amp; Algorithms</span>
+            <span class="skill-chip">System Design</span>
+            <span class="skill-chip">REST APIs</span>
+            <span class="skill-chip">Distributed Systems</span>
+            <span class="skill-chip">OOP</span>
+            <span class="skill-chip">OS</span>
+            <span class="skill-chip">DBMS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── COMPETITIVE PROGRAMMING ────────────────────────────────── -->
+    <div class="divider"><hr></div>
+    <section id="cp">
+      <div class="section-label fade-in">Competitive Programming</div>
+
+      <div class="cp-grid fade-in">
+        <div class="cp-card lc">
+          <div class="cp-platform">LeetCode</div>
+          <div class="cp-rating">1930+</div>
+          <div class="cp-title">Knight 🏆</div>
+          <div class="cp-percentile">Top <strong>5%</strong> globally</div>
+        </div>
+        <div class="cp-card cc">
+          <div class="cp-platform">CodeChef</div>
+          <div class="cp-rating">1606</div>
+          <div class="cp-title">3★ Rated</div>
+          <div class="cp-percentile">Top <strong>10%</strong> · Active contests</div>
+        </div>
+        <div class="cp-card cf">
+          <div class="cp-platform">Codeforces</div>
+          <div class="cp-rating">1284</div>
+          <div class="cp-title">Pupil</div>
+          <div class="cp-percentile">Rating climbing 📈</div>
+        </div>
+      </div>
+
+      <div class="achievement-card fade-in">
+        <div class="ach-icon">🥈</div>
+        <div>
+          <div class="ach-title">Binance Ideathon 2022 — Runner-up</div>
+          <div class="ach-desc">Designed and built a blockchain-based solution under the <strong style="color:var(--text)">Blockchain for Good</strong> initiative. Competed nationally against top engineering teams.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONTACT ─────────────────────────────────────────────────── -->
+    <div class="divider"><hr></div>
+    <section id="contact" style="padding-bottom: 60px;">
+      <div class="section-label fade-in">Contact</div>
+
+      <div class="fade-in" style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 700px;">
+
+        <a href="mailto:sinojiameet321@gmail.com" class="contact-card">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">sinojiameet321@gmail.com</div>
+          </div>
+        </a>
+
+        <a href="tel:+919426377084" class="contact-card">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.48 2 2 0 0 1 3.56 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+91 9426377084</div>
+          </div>
+        </a>
+
+        <a href="https://linkedin.com/in/meet-sinojia-453595203" target="_blank" class="contact-card">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">meet-sinojia-453595203</div>
+          </div>
+        </a>
+
+        <a href="https://github.com/MeetSinojia" target="_blank" class="contact-card">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">github.com/MeetSinojia</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-left">
+      <div style="font-size:14px; color:var(--muted); font-family:var(--font-display); font-weight:600;">Meet Sinojia</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/MeetSinojia" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/meet-sinojia-453595203" target="_blank">LinkedIn</a>
+      <a href="https://leetcode.com/u/Meet_Sinojia" target="_blank">LeetCode</a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="main.js"></script>
+
+</body>
 </html>
